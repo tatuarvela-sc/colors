@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Color Mapping Table</title>
+  <style>
+      td {
+          width: 50px;
+          height: 50px;
+          cursor: pointer;
+          border: 1px solid black;
+          border-radius: 4px;
+          font-family: sans-serif;
+          text-shadow: 1px 1px white;
+      }
+  </style>
+</head>
+<body>
+
+<div id="tables-container"></div>
+<div>
+  <p>Väreille 500 on default</p>
+  <p>Mustalle 1000 on default</p>
+</div>
+
+<script>
+  const colorMapping = {
+      "blue": {
+        "50": "#eaf2fd",
+        "100": "#d5e6fc",
+        "200": "#abcefa",
+        "300": "#81b5f7",
+        "400": "#579df5",
+        "500": "#2D85F3",
+        "600": "#246ac2"
+      },
+      "green": {
+        "50": "#e8f9f5",
+        "100": "#d2f3eb",
+        "200": "#a6e7d8",
+        "300": "#79dbc5",
+        "400": "#4dcfb2",
+        "500": "#21C49F",
+        "600": "#1a9c7f"
+      },
+      "yellow": {
+        "50": "#fdf9ec",
+        "100": "#fcf3da",
+        "200": "#fae7b5",
+        "300": "#f7db91",
+        "400": "#f5cf6c",
+        "500": "#F3C348",
+        "600": "#c29c39",
+      },
+      "red": {
+        "50": "#fce6e6",
+        "100": "#f9cece",
+        "200": "#f49d9d",
+        "300": "#ee6c6c",
+        "400": "#e93b3b",
+        "500": "#E40B0B",
+        "600": "#b60808"
+      },
+      "orange": {
+        "50": "#fef1e7",
+        "100": "#fde3d0",
+        "200": "#fcc7a1",
+        "300": "#fbab73",
+        "400": "#fa8f44",
+        "500": "#F97316",
+        "600": "#c75c11"
+      }, "purple": {
+        "50": "#f5f0fc",
+        "100": "#ebe1f9",
+        "200": "#d8c3f3",
+        "300": "#c5a5ee",
+        "400": "#b287e8",
+        "500": "#9F6AE3",
+        "600": "#7f54b5",
+      },
+      "white": {
+        "500": "#ffffff"
+      },
+      "black": {
+        "50": "#f2f2f2",
+        "100": "#e5e5e5",
+        "200": "#cccccc",
+        "300": "#b2b2b2",
+        "400": "#999999",
+        "500": "#7f7f7f",
+        "600": "#666666",
+        "700": "#4c4c4c",
+        "800": "#333333",
+        "900": "#191919",
+        "1000": "#000000"
+      }
+    }
+  ;
+
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text);
+  }
+
+  const container = document.getElementById("tables-container");
+
+  for (const [mainColor, shades] of Object.entries(colorMapping)) {
+    const table = document.createElement("table");
+    const caption = document.createElement("caption");
+    caption.textContent = mainColor;
+    table.appendChild(caption);
+
+    const row = document.createElement("tr");
+    for (const [shade, color] of Object.entries(shades)) {
+      const cell = document.createElement("td");
+      cell.style.backgroundColor = color;
+      cell.addEventListener("click", () => copyToClipboard(color));
+      cell.textContent = shade;
+      row.appendChild(cell);
+    }
+
+    table.appendChild(row);
+    container.appendChild(table);
+  }
+</script>
+
+</body>
+</html>
